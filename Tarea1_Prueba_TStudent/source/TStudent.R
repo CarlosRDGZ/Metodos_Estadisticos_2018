@@ -24,4 +24,15 @@ sigma_x <- sqrt(sigma2 / n)
 t_cal <- (x.mean - mu0) / sigma_x
 
 # ttablas
-t_tab <- qt(0.05/2, df = n, lower.tail = F)
+t_tab <- qt(0.05/2, df = n - 1, lower.tail = F)
+
+# Hipostesis. Si |t_cal| >  t_tablas: Rechaszo H_0
+abs(t_cal) > t_tab
+
+# t-Student One Sample Test
+test <- t.test(x, mu = mu0, alternative = "two.sided", conf.level = 0.95)
+
+# Supuesto de normalidad
+qqnorm(x)
+qqline(x)
+shapiro.test(x)
