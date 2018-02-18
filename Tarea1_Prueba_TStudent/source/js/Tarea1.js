@@ -6,7 +6,7 @@ var latex = require('./LaTexTStudent')
 var data = {
     values: [20, 30, 25, 20, 30, 50, 25, 20, 20, 30, 25, 40, 50, 35, 20],
     mean: 0,
-    vrnz: 0,
+    vrnc: 0,
     stdD: 0,
     tCal: 0,
     mu0: 25
@@ -16,23 +16,22 @@ var data = {
 var data = {
     values: [5, 2, 9, 7, 4, 5, 6, 7, 7, 10, 5, 6, 5, 4, 5, 8, 6, 6, 3, 6, 7, 3, 6],
     mean: 0,
-    vrnz: 0,
+    vrnc: 0,
     stdD: 0,
     tCal: 0,
     mu0: 8
 }
 */
 
-/* Ejercicio 3
+/* Ejercicio 3 */
 var data = {
     values: [61, 64, 68, 67, 70, 73, 76, 78, 81, 67, 70, 73, 66, 74, 77, 80, 85, 75, 72, 78, 77, 80],
     mean: 0,
-    vrnz: 0,
+    vrnc: 0,
     stdD: 0,
     tCal: 0,
     mu0: 75
 }
-*/
 
 /* Ejercicio 4
 var data = {
@@ -70,7 +69,7 @@ var data = {
 }
 */
 
-/* Ejercicio 6 */
+/* Ejercicio 6
 var data = {
     x: {
         values: [17.6211, 16.6897, 15.4212, 14.5710,
@@ -92,8 +91,8 @@ var data = {
     stdD: 0,
     tCal: 0
 }
-
-/* tStudent 2 Indipendent Samples */
+*/
+/* tStudent 2 Indipendent Samples
 console.log('xMean:', latex.mean(data.x))
 console.log('yMean:', latex.mean(data.y, 'y'))
 console.log('xVrnc:', latex.variance(data.x,'x','S'))
@@ -106,8 +105,8 @@ for(const prop in data) {
 }
 console.log(`stdD: ${data.stdD}`)
 console.log(`tCal: ${data.tCal}`)
-
-/* tStuden One Sample
+*/
+/* tStuden One Sample */
 console.log(latex.mean(data))
 console.log(latex.variance(data))
 console.log(latex.stdDesv(data))
@@ -117,4 +116,3 @@ console.log('')
 for(const prop in data) {
     console.log(`${prop}: ${data[prop]}`)
 }
-*/
