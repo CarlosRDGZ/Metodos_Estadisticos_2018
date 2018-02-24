@@ -107,12 +107,12 @@ console.log(`stdD: ${data.stdD}`)
 console.log(`tCal: ${data.tCal}`)
 */
 /* tStuden One Sample */
-console.log(latex.mean(data))
-console.log(latex.variance(data))
-console.log(latex.stdDesv(data))
-console.log(latex.tCal(data))
+console.log(latex.mean(data));
+console.log(latex.variance(data));
+console.log(latex.stdDesv(data));
+console.log(latex.tCal(data));
 
-console.log('')
+console.log('');
 for(const prop in data) {
     console.log(`${prop}: ${data[prop]}`)
 }
