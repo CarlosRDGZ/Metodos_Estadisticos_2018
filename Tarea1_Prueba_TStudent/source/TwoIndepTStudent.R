@@ -23,12 +23,16 @@ x.mean <- mean(x)
 n_x    <- length(x)
 # variance x
 S2.x   <- ( sum(x ^ 2) - (n_x * x.mean ^ 2) ) / (n_x - 1)
+# stnd deviation
+S_x    <- sqrt(S2.x/n_x)
 
 # mean y
 y.mean <- mean(y)
 n_y    <- length(y)
 # variance y
 S2.y   <- ( sum(y ^ 2) - (n_y * y.mean ^ 2) ) / (n_y - 1)
+# stnd deviation
+S_y    <- sqrt(S2.y/n_y)
 
 mu0   <- 0
 # Varianza Poblacional
@@ -61,3 +65,4 @@ t_cal
 t_tab
 
 test
+
