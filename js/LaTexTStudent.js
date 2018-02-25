@@ -83,3 +83,11 @@ exports.tCal = function(tStudent, test = 'onesample') {
         return 'Not an option';
     }
 }
+
+/**
+ * 
+ * @param {TStudent} tStudent 
+ */
+exports.tTablas = function(tStudent) {
+    return `$$t_{tablas} = t(\\frac{${tStudent.alfa}}{2}, ${tStudent.values.length}-1) = ${tStudent.tTablas}$$`;
+}
