@@ -53,7 +53,7 @@ exports.stdDev = function(tStudent, test = 'onesample') {
     else if (test == 'twodepen'){
         let length = tStudent.values.length;
         let vrnc = tStudent.variance;
-        return `$$S_{\\bar{x}_{D}} = \\sqrt{\\frac{${vrnc}}{${length}}}=\\sqrt{${vrnc / length}}=${tStudent.stdDeviation}$$`;
+        return `$$S_{\\bar{x}_{D}} = \\sqrt{\\frac{${vrnc}}{${length}}}=\\sqrt{${(vrnc / length).toFixed(4)}}=${tStudent.stdDeviation}$$`;
     }
     else {
         return 'Not an option';

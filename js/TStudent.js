@@ -51,8 +51,10 @@ class TStudent {
             area = 1;
         else if (halfAlfa == 0.025)
             area = 2;
+        else if (halfAlfa == 0.01)
+            area = 3
         else
-            area = 3;
+            area = 4;
 
         if (degreeOfFreedom <= 30)
             v = degreeOfFreedom - 1;
