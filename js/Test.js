@@ -1,3 +1,46 @@
+/**/
+const AOVRB = require('./AOVRandomizeBlocks');
+
+var data = [
+    [ 36.05, 52.47, 56.55, 45.20, 35.25 ],
+    [ 42.47, 85.15, 63.20, 52.10, 66.20 ],
+    [ 51.50, 65.00, 73.10, 64.40, 57.45 ],
+    [ 37.55, 59.30, 79.12, 58.33, 70.54 ]
+];
+
+var aov = new AOVRB(data, 4, 5);
+console.log('yi.', aov.yIDot);
+console.log('yi.M', aov.yIDotMean);
+console.log('y.j', aov.yDotJ);
+console.log('y.jM', aov.yDotJMean);
+console.log();
+console.log('GLtrat', aov.deegresOfFreedomRegression);
+console.log('GLbloc', aov.deegresOfFreedomBlock);
+console.log('GLerror', aov.deegresOfFreedomError);
+console.log('GLtotal', aov.deegresOfFreedomTotal);
+console.log();
+console.log('SCtrat', aov.sumOfSquaresRegression);
+console.log('SCblock', aov.sumOfSquaresBlock);
+console.log('SCerror', aov.sumOfSquaresError);
+console.log('SCtotal', aov.sumOfSquaresTotal);
+console.log();
+console.log('CMtrat', aov.meanSquareRegression);
+console.log('CMblock', aov.meanSquareBlock);
+console.log('CMerror', aov.meanSquareError);
+console.log();
+console.log('Fcal', aov.fCal);
+console.log('FcalB', aov.fCalB);
+console.log();
+console.log('Ftablas', aov.fTablas);
+console.log('FtablasB', aov.fTablasB);
+console.log();
+console.log('q', aov.q);
+console.log('Sy', aov._Sy);
+console.log('DHS', aov.hSD);
+/**/
+
+
+/*
 const AnalysisOfVariance = require('./AnalysisOfVariance');
 const latex = require('./LaTexAOV');
 
@@ -37,6 +80,7 @@ console.log('fTablas:', analysis.fTablas);
 console.log('q:', analysis.q);
 console.log('Sy:', analysis._Sy);
 console.log('DHS:', analysis.hSD);
+*/
 
 /*
 const TStudent = require('./TStudent')

@@ -1,14 +1,14 @@
 class AnalysisOfVariance {
     /**
      * 
-     * @param {Array} data Matriz con los datos de cada tratamiento por observacion. data[treatent][observation]
+     * @param {Array} data Matriz con los datos de cada tratamiento por observacion. data[treatent][blocks]
      * @param {Number} treatments Numero de tratamientos de estudio
-     * @param {Number} observations Numero de observaciones por tratamiento
+     * @param {Number} blocks Numero de observaciones por tratamiento
      */
-    constructor(data, treatments, observations) {
+    constructor(data, treatments, blocks) {
         this._data = data;
         this._treatments = treatments;
-        this._observations = observations;
+        this._blocks = blocks;
     }
 
     get data() {
@@ -16,7 +16,7 @@ class AnalysisOfVariance {
     }
 
     get r() {
-        return this._observations;
+        return this._blocks;
     }
 
     get t() {
@@ -28,7 +28,7 @@ class AnalysisOfVariance {
     }
 
     get yIDotMean() {
-        return this.yIDot.map(e => Number((e / this._observations).toFixed(4)));
+        return this.yIDot.map(e => (e / this._blocks));
     }
 
     get yDotDot() {
@@ -36,17 +36,17 @@ class AnalysisOfVariance {
     }
 
     get yDotDotMean() {
-        return Number((this.yDotDot / (this._treatments * this._observations)).toFixed(4));
+        return this.yDotDot / (this._treatments * this._blocks);
     }
 
     get sumOfSquaresRegression() {
-        return Number((this.yIDot.map(e => e * e).reduce((a,b) => a + b, 0) / this._observations -
-            (this.yDotDot * this.yDotDot) / (this._treatments * this._observations)).toFixed(4))
+        return this.yIDot.map(e => e * e).reduce((a,b) => a + b, 0) / this._blocks -
+            (this.yDotDot * this.yDotDot) / (this._treatments * this._blocks);
     }
 
     get sumOfSquaresTotal() {
-        return Number((this._data.map(e => e.map(e => e * e).reduce((a,b) => a + b, 0)).reduce((a,b) => a + b, 0) - 
-            (this.yDotDot * this.yDotDot) / (this._treatments * this._observations)).toFixed(4));
+        return this._data.map(e => e.map(e => e * e).reduce((a,b) => a + b, 0)).reduce((a,b) => a + b, 0) - 
+            (this.yDotDot * this.yDotDot) / (this._treatments * this._blocks);
     }
 
     get sumOfSquaresError() {
@@ -58,23 +58,23 @@ class AnalysisOfVariance {
     }
 
     get deegresOfFreedomError() {
-        return (this._observations * this._treatments) - this._treatments;
+        return (this._blocks * this._treatments) - this._treatments;
     }
 
     get deegresOfFreedomTotal() {
-        return (this._observations * this._treatments) - 1;
+        return (this._blocks * this._treatments) - 1;
     }
 
     get meanSquareRegression() {
-        return Number((this.sumOfSquaresRegression / this.deegresOfFreedomRegression).toFixed(4));
+        return this.sumOfSquaresRegression / this.deegresOfFreedomRegression;
     }
 
     get meanSquareError() {
-        return Number((this.sumOfSquaresError / this.deegresOfFreedomError).toFixed(4));
+        return this.sumOfSquaresError / this.deegresOfFreedomError;
     }
 
     get fCal() {
-        return Number((this.meanSquareRegression / this.meanSquareError).toFixed(4));
+        return this.meanSquareRegression / this.meanSquareError;
     }
 
     get fTablas() {
@@ -116,7 +116,7 @@ class AnalysisOfVariance {
     }
 
     get _Sy() {
-        return Number(Math.sqrt(this.meanSquareError / this._observations).toFixed(4));
+        return Math.sqrt(this.meanSquareError / this._blocks);
     }
 
     get q() {
@@ -139,7 +139,7 @@ class AnalysisOfVariance {
         else
             dFE = 25;
         
-        return TUKEY_TABLE[dFE][pop];
+        return TUKEYS_TABLE[dFE][pop];
     }
 
     /**
@@ -189,13 +189,13 @@ const TABLE_VALUES_F = [
     [ 4.00,3.15,2.76,2.53,2.37,2.25,2.17,2.10,2.04,1.99,1.92,1.84,1.75,1.70,1.65,1.59,1.53,1.47,1.39 ],
     [ 3.92,3.07,2.68,2.45,2.29,2.17,2.09,2.02,1.96,1.91,1.83,1.75,1.66,1.61,1.55,1.50,1.43,1.35,1.25 ],
     [ 3.84,3.00,2.60,2.37,2.21,2.10,2.01,1.94,1.88,1.83,1.75,1.67,1.57,1.52,1.46,1.39,1.32,1.22,1.00 ]
-]
+];
 
 /**
  * Matrix with values for standarize distribution of range (Tukey's table).
- * TABLE_VALUES_F[ deegreOfFreedomError ][ populations ]
+ * TUKEYS_TABLE[ deegreOfFreedomError ][ populations ]
  */
-const TUKEY_TABLE = [
+const TUKEYS_TABLE = [
     [ 18.0,27.0,32.8,37.1,40.4,43.1,45.4,47.4,49.1,50.6,52.0,53.2,54.3,55.4,56.3,57.2,58.0,58.8,59.6 ],
     [ 6.08,8.33,9.80,10.9,11.7,12.4,13.0,13.5,14.0,14.4,14.8,18.1,15.4,15.7,15.9,16.1,16.4,16.6,16.8 ],
     [ 4.50,5.91,6.82,7.50,8.04,8.48,8.85,9.18,9.46,9.72,9.95,10.2,10.4,10.5,10.7,10.8,11.0,11.1,11.2 ],
@@ -222,6 +222,5 @@ const TUKEY_TABLE = [
     [ 2.83,3.40,3.74,3.98,4.16,4.31,4.44,4.55,4.65,4.73,4.81,4.88,4.94,5.00,5.06,5.11,5.15,5.20,5.24 ],
     [ 2.80,3.36,3.68,3.92,4.10,4.24,4.36,4.47,4.56,4.64,4.71,4.78,4.94,4.90,4.95,5.00,5.04,5.09,5.13 ],
     [ 2.77,3.31,3.63,3.86,4.03,4.17,4.29,4.39,4.47,4.55,4.62,4.68,4.74,4.80,4.85,4.89,4.93,4.97,5.01 ]
-]
-
+];
 module.exports = AnalysisOfVariance;
