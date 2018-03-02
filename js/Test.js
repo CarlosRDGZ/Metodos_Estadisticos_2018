@@ -1,5 +1,6 @@
 /**/
 const AOVRB = require('./AOVRandomizeBlocks');
+const Latex = require('./LaTexAOVBR');
 
 var data = [
     [ 36.05, 52.47, 56.55, 45.20, 35.25 ],
@@ -9,6 +10,7 @@ var data = [
 ];
 
 var aov = new AOVRB(data, 4, 5);
+/*
 console.log('yi.', aov.yIDot);
 console.log('yi.M', aov.yIDotMean);
 console.log('y.j', aov.yDotJ);
@@ -37,6 +39,31 @@ console.log();
 console.log('q', aov.q);
 console.log('Sy', aov._Sy);
 console.log('DHS', aov.hSD);
+*/
+console.log(Latex.yIDot(aov));
+console.log(Latex.yIDotMean(aov));
+console.log(Latex.yDotJ(aov));
+console.log(Latex.yDotJMean(aov));
+console.log(Latex.yDotDot(aov));
+console.log(Latex.yDotDotMean(aov));
+console.log();
+console.log(Latex.sumOfSqrR(aov));
+console.log(Latex.sumOfSqrB(aov));
+console.log(Latex.sumOfSqrE(aov));
+console.log(Latex.sumOfSqrT(aov));
+console.log();
+console.log(Latex.sortedMeans(aov));
+console.log(Latex.sortedMeansB(aov));
+console.log();
+console.log(Latex.q(aov));
+console.log(Latex.qB(aov));
+console.log(Latex.Sy(aov));
+console.log(Latex.SyB(aov));
+console.log(Latex.hSD(aov));
+console.log(Latex.comparationHSD(aov));
+console.log(Latex.hSDB(aov));
+console.log(Latex.comparationHSDB(aov));
+
 /**/
 
 

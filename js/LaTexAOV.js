@@ -7,7 +7,7 @@ class LaTexAnalisisOfVariance {
      * @param {AOV} aov 
      */
     static yIDot(aov) {
-        return `$$y_{i.}=${aov.yIDot.map((e,i) => `y_{${i+1}.}=${e}`).join(' \\enspace ')}$$`;
+        return `$$y_{i.}=${aov.yIDot.map((e,i) => `y_{${i+1}.}=${e.toFixed(4)}`).join(' \\enspace ')}$$`;
     }
 
     /**
@@ -15,7 +15,7 @@ class LaTexAnalisisOfVariance {
      * @param {AOV} aov 
      */
     static yIDotMean(aov) {
-        return `$$\\bar{y}_{i.}=${aov.yIDot.map((e,i) => `\\bar{y}_{${i+1}.}=${e}`).join(' \\enspace ')}$$`;
+        return `$$\\bar{y}_{i.}=${aov.yIDotMean.map((e,i) => `\\bar{y}_{${i+1}.}=${e}`).join(' \\enspace ')}$$`;
     }
 
     /**
