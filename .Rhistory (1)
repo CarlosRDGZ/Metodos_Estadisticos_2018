@@ -1,3 +1,6 @@
+valor.esperado   <- 0
+# promedio de la diferencia entre los tratamientos
+promedio <- mean(diferencia)
 promedio
 n <- length(diferencia)
 n
@@ -507,6 +510,3 @@ Prueba$groups
 qqnorm(modelo$residuals)
 qqline(modelo$residuals)
 shapiro.test(modelo$residuals)
-install.packages(agricolae)
-install.packages("agricolae")
-library(agricolae)

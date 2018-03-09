@@ -18,8 +18,8 @@ class TStudent {
     }
 
     get mean() {
-        let sum = this._values.reduce((a, b) => a + b, 0);
-        return Number((sum / this._values.length).toFixed(4));
+        let sum = this._values .reduce((a, b) => a + b, 0);
+        return sum / this._values.length;
     }
 
     get variance() {
@@ -27,16 +27,16 @@ class TStudent {
         let valSquares = new Array(0, length);
         for (let i = 0; i < length; i++)
             valSquares[i] = this._values[i] * this._values[i];
-        let sum = valSquares.reduce((a, b) => a + b, 0);
-        return Number(((sum - (this.mean * this.mean * length)) / (length - 1)).toFixed(4));
+        let sumOfSquares = valSquares.reduce((a, b) => a + b, 0);
+        return (sumOfSquares - (this.mean * this.mean * length)) / (length - 1);
     }
     
     get stdDeviation() {
-        return Number(Math.sqrt(this.variance / this._values.length).toFixed(4));
+        return Math.sqrt(this.variance / this._values.length);
     }
 
     get tCal() {
-        return Number(((this.mean - this.mu0) / this.stdDeviation).toFixed(4));
+        return (this.mean - this.mu0) / this.stdDeviation;
     }
 
     get tTablas() {

@@ -1,33 +1,35 @@
-Resp_Prod <- c(
+library("agricolae", lib.loc = "C:/Users/Carlos/Documents/R/win-library/3.4/")
+
+results <- c(
     45,43,41,42,
     44,44,45,43,
     40,44,45,46,
     44,45,46,45
 )
 
-Trt_Operadores <- rep( c("Operador1", "Operador2", "Operador3", "Operador4"), each = 4)
+operators <- rep( c("operator1", "operator2", "operator3", "operator4"), each = 4)
 
-Blq_Tecnica <- rep(c("Tecnica1", "Tecnica2", "Tecnica3", "Tecnica4"), times = 4)
+technics <- rep(c("technic1", "technic2", "technic3", "technic4"), times = 4)
 
-Datos<- data.frame(Resp_Prod, Trt_Operadores, Blq_Tecnica)
+data<- data.frame(results, operators, technics)
 
-head(Datos)
+print(head(data))
 
-tail(Datos)
+print(tail(data))
 
-modelo <- aov(Resp_Prod~ Trt_Operadores+ Blq_Tecnica, data = Datos)
-summary(modelo)
+model <- aov(results~ operators+ technics, data = data)
+print(summary(model))
 
-TukeyHSD(modelo)
+print(TukeyHSD(model))
 
 par(mar=c(6,11,3,1))
-plot(TukeyHSD(modelo,'Trt_Operadores'), las=1, col="brown")
+plot(TukeyHSD(model,'operators'), las=1, col="brown")
 
 library(agricolae)
-Prueba <- HSD.test(modelo, "Trt_Operadores", group=TRUE)
-Prueba$groups
+test <- HSD.test(model, "operators", group=TRUE)
+print(test$groups)
 
-qqnorm(modelo$residuals) 
-qqline(modelo$residuals)
+qqnorm(model$residuals) 
+qqline(model$residuals)
 
-shapiro.test(modelo$residuals)
+shapiro.test(model$residuals)

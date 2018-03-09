@@ -1,32 +1,34 @@
-Resp_Prod <- c(
+library("agricolae", lib.loc = "C:/Users/Carlos/Documents/R/win-library/3.4/")
+
+results <- c(
     13,22,18,
     16,24,17,
     5,4,1
 )
 
-Trt_Soluciones <- rep( c("Solucion1", "Solucion2", "Solucion3"), each = 3)
+solutions <- rep( c("solution1", "solution2", "solution3"), each = 3)
 
-Blq_Dias <- rep(c("Dia1", "Dia2", "Dia3"), times = 3)
+days <- rep(c("day1", "day2", "day3"), times = 3)
 
-Datos<- data.frame(Resp_Prod, Trt_Soluciones, Blq_Dias)
+data<- data.frame(results, solutions, days)
 
-head(Datos)
+print(head(data))
 
-tail(Datos)
+print(tail(data))
 
-modelo <- aov(Resp_Prod~ Trt_Soluciones+ Blq_Dias, data = Datos)
-summary(modelo)
+model <- aov(results~ solutions+ days, data = data)
+print(summary(model))
 
-TukeyHSD(modelo)
+print(TukeyHSD(model))
 
 par(mar=c(6,11,3,1))
-plot(TukeyHSD(modelo,'Trt_Soluciones'), las=1, col="brown")
+plot(TukeyHSD(model,'solutions'), las=1, col="brown")
 
 library(agricolae)
-Prueba <- HSD.test(modelo, "Trt_Soluciones", group=TRUE)
-Prueba$groups
+test <- HSD.test(model, "solutions", group=TRUE)
+print(test$groups)
 
-qqnorm(modelo$residuals) 
-qqline(modelo$residuals)
+qqnorm(model$residuals) 
+qqline(model$residuals)
 
-shapiro.test(modelo$residuals)
+shapiro.test(model$residuals)

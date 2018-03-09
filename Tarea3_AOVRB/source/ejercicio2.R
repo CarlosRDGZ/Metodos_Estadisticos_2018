@@ -1,32 +1,34 @@
-Resp_Prod <- c(
+library("agricolae", lib.loc = "C:/Users/Carlos/Documents/R/win-library/3.4/")
+
+results <- c(
     1.04,1.05,1.06,1.07,1.05,
     1.10,1.11,1.09,1.07,1.08,
     1.21,1.19,1.18,1.17,1.21
 )
 
-Trt_Marcas <- rep( c("Marca1", "Marca2", "Marca3"), each = 5)
+brands <- rep( c("brand1", "brand2", "brand3"), each = 5)
 
-Blq_Mediciones <- rep(c("Medicion1", "Medicion2", "Medicion3", "Medicion4", "Medicion5"), times = 3)
+measurs <- rep(c("measur1", "measur2", "measur3", "measur4", "measur5"), times = 3)
 
-Datos<- data.frame(Resp_Prod, Trt_Marcas, Blq_Mediciones)
+data<- data.frame(results, brands, measurs)
 
-head(Datos)
+print(head(data))
 
-tail(Datos)
+print(tail(data))
 
-modelo <- aov(Resp_Prod~ Trt_Marcas+ Blq_Mediciones, data = Datos)
-summary(modelo)
+model <- aov(results~ brands+ measurs, data = data)
+summary(model)
 
-TukeyHSD(modelo)
+TukeyHSD(model)
 
 par(mar=c(6,11,3,1))
-plot(TukeyHSD(modelo,'Trt_Marcas'), las=1, col="brown")
+plot(TukeyHSD(model,'brands'), las=1, col="brown")
 
 library(agricolae)
-Prueba <- HSD.test(modelo, "Trt_Marcas", group=TRUE)
-Prueba$groups
+test <- HSD.test(model, "brands", group=TRUE)
+print(test$groups)
 
-qqnorm(modelo$residuals) 
-qqline(modelo$residuals)
+qqnorm(model$residuals) 
+qqline(model$residuals)
 
-shapiro.test(modelo$residuals)
+shapiro.test(model$residuals)
