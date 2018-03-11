@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # install.packages("crossdes")
 # install.packages("magrittr")
 # install.packages("tidyr")
@@ -36,10 +35,21 @@ y[which(y>10)] <- 10
 Eval_Proyect$Calificacion <- round(y[1:length(y),],0)
 datos <- Eval_Proyect
 head(datos)
-=======
-# install.packages("crossdes")
-library(crossdes)
-set.seed(1)
-bib <- find.BIB(trt = 12, b = 6, k = 5)
-bib
->>>>>>> 6994fb4f339ad294e3211029bbd7bb5507b0d28a
+
+####### Tabla de ANDEVA #######
+# install.packages("nlme")
+library(nlme)
+modelo <- lme(Calificacion~Id_Proyecto, random = ~ 1 | Id_Evaluador, data = datos)
+summary(modelo)
+
+anova(modelo)
+
+# install.packages("emmeans")
+library(emmeans)
+Ajuste <- emmeans(modelo, ~Id_Proyecto)
+Ajuste
+
+contrast(emmeans(modelo, pairwise ~ Id_Proyecto))$contrasts
+
+# install.packages("multcompView")
+cld(Ajuste, alpha = .05)
